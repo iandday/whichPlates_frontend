@@ -1,3 +1,6 @@
+run:
+	@ cd app && poetry run  uvicorn main:app --reload --port 8001 
+
 format-black:
 	@black .
 

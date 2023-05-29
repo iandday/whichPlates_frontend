@@ -1,14 +1,13 @@
 import which_plates
 from fastapi import APIRouter
-from schemas import PlateRequest, PlateResponse
-
-router = APIRouter(
-    #    prefix='/plates/',
-    #    tags=['plates']
-)
+from api.schemas.plate import PlateRequest, PlateResponse
 
 
-@router.post("/calculate/", response_model=PlateResponse)
+
+router = APIRouter()
+
+
+@router.post("/calculate/", response_model=PlateResponse, tags=["plates"])
 async def calculate_plates(plate_request: PlateRequest) -> PlateResponse:
     set_count = 1
     used_plates = {}

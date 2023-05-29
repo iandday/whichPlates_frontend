@@ -14,8 +14,8 @@ build-backend = "poetry.core.masonry.api"
 python = "^3.10"
 lxml = "^4.9.2"
 fastapi = "^0.95.1"
-uvicorn = {extras = ["standard"], version = "^0.21.1"}
 which-plates = "^0.7.0"
+nicegui = "^1.2.14"
 
 
 [tool.poetry.group.lint.dependencies]
@@ -89,3 +89,6 @@ upload_to_pypi = false
 upload_to_release = false
 hvcs = "github"
 commit_message = "{version} [skip ci]" # skip triggering ci pipelines for version commits
+
+
+#https://github.com/tiangolo/full-stack-fastapi-postgresql/tree/master
