@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "./components/navbar/NavBar";
+import InputForm from "./components/inputForm/inputForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </GridItem>
         <GridItem pl="2" area={"main"}>
           Main
+          <InputForm />
         </GridItem>
         <GridItem pl="2" area={"footer"}>
           Footer

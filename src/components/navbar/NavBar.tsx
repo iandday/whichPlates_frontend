@@ -1,6 +1,6 @@
 import React from "react";
 import ColorModeSwitch from "./ColorModeSwitch";
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
 
 interface Props {}
 
@@ -8,9 +8,7 @@ const NavBar = ({}: Props) => {
   return (
     <>
       <Flex>
-        <Box p="4" bg="red.400">
-          Box 1
-        </Box>
+        <Heading>Which Plates?</Heading>
         <Spacer />
         <ColorModeSwitch />
       </Flex>
