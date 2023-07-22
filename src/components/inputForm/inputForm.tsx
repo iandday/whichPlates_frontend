@@ -6,25 +6,33 @@ import {
   Text,
   Checkbox,
   CheckboxGroup,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Button,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import workout from "../../AppTypes.ts";
 
-interface Props {}
+interface Props {
+  workout: workout;
+  setWorkout: ({}: workout) => void;
+}
 
-const inputForm = ({}: Props) => {
-  const [workoutInput, setWorkoutInput] = React.useState<workoutInput>({
-    barWeight: "45",
-    availablePlates: [],
-  });
+const inputForm = ({ workout, setWorkout }: Props) => {
+  const [currentPercentage, setCurrentPercentage] = React.useState<number>(0);
 
   return (
     <>
       <Text>Barbell Weight</Text>
       <RadioGroup
         onChange={(value) =>
-          setWorkoutInput({ ...workoutInput, barWeight: value })
+          setWorkout({ ...workout, barWeight: parseInt(value) })
         }
-        value={workoutInput.barWeight}
-        defaultValue={workoutInput.barWeight}
+        value={workout.barWeight.toString()}
+        defaultValue={workout.barWeight.toString()}
       >
         <Stack direction="row">
           <Radio value="25">25</Radio>
@@ -36,9 +44,9 @@ const inputForm = ({}: Props) => {
       <CheckboxGroup
         defaultValue={["45", "35", "25", "15", "10"]}
         onChange={(value) =>
-          setWorkoutInput({ ...workoutInput, availablePlates: [...value] })
+          setWorkout({ ...workout, availablePlates: [...value] })
         }
-        value={workoutInput.availablePlates}
+        value={workout.availablePlates}
       >
         <Stack spacing={[1, 5]} direction={["column", "row"]}>
           <Checkbox value="45">45</Checkbox>
@@ -50,6 +58,48 @@ const inputForm = ({}: Props) => {
           <Checkbox value="2.5">2.5</Checkbox>
         </Stack>
       </CheckboxGroup>
+      <NumberInput
+        step={5}
+        defaultValue={workout.barWeight}
+        min={workout.barWeight}
+        onChange={(valueAsString, valueAsNumber) =>
+          setWorkout({ ...workout, oneRepMax: valueAsNumber })
+        }
+        value={workout.oneRepMax}
+      >
+        One Rep Max
+        <NumberInputField />
+        <NumberInputStepper>
+          <NumberIncrementStepper />
+          <NumberDecrementStepper />
+        </NumberInputStepper>
+      </NumberInput>
+      <NumberInput
+        step={5}
+        min={1}
+        max={100}
+        onChange={(valueAsString, valueAsNumber) =>
+          setCurrentPercentage(valueAsNumber)
+        }
+      >
+        Add percentage
+        <NumberInputField />
+      </NumberInput>
+      <Button
+        onClick={() => {
+          setWorkout({
+            ...workout,
+            percentages: [...workout.percentages, currentPercentage],
+          });
+        }}
+      >
+        Add Percentage
+      </Button>
+      <ul>
+        {workout.percentages.map((p) => (
+          <li>{p}</li>
+        ))}
+      </ul>
     </>
   );
 };
