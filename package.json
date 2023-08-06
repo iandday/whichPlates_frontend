@@ -5,7 +5,7 @@
   "repository": {
     "url": "git+https://github.com/iandday/whichPlates_website.git"
   },
-  "homepage": "https://iandday.github.io/",
+  "homepage": "https://iandday.github.io/whichPlates_website",
   "type": "module",
   "scripts": {
     "dev": "vite",
