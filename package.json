@@ -2,6 +2,9 @@
   "name": "whichplates-website",
   "private": false,
   "version": "0.1.1",
+  "repository": {
+    "url": "git+https://github.com/iandday/whichPlates_website.git"
+  },
   "homepage": "https://iandday.github.io/",
   "type": "module",
   "scripts": {
