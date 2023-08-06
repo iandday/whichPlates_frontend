@@ -29,10 +29,10 @@ interface Props {
   handleCalculate: ({}: workout) => void;
 }
 
-const inputForm = ({ workout, handleCalculate }: Props) => {
-  const [currentPercentage, setCurrentPercentage] = React.useState<number | "">(
-    ""
-  );
+const InputForm = ({ workout, handleCalculate }: Props) => {
+  const [currentPercentage, setCurrentPercentage] = React.useState<
+    number | undefined
+  >(undefined);
   const [tempWorkout, setTempWorkout] = React.useState<workoutInput>({
     ...workout,
   });
@@ -56,7 +56,7 @@ const inputForm = ({ workout, handleCalculate }: Props) => {
               defaultValue={tempWorkout.barWeight}
               min={tempWorkout.barWeight}
               value={tempWorkout.oneRepMax}
-              onChange={(valueAsString, valueAsNumber) =>
+              onChange={(_, valueAsNumber) =>
                 setTempWorkout({ ...tempWorkout, oneRepMax: valueAsNumber })
               }
               width="100px"
@@ -109,7 +109,7 @@ const inputForm = ({ workout, handleCalculate }: Props) => {
                 min={1}
                 max={100}
                 value={currentPercentage}
-                onChange={(valueAsString, valueAsNumber) =>
+                onChange={(_, valueAsNumber) =>
                   setCurrentPercentage(valueAsNumber)
                 }
                 width="100px"
@@ -122,14 +122,15 @@ const inputForm = ({ workout, handleCalculate }: Props) => {
               <Spacer />
               <IconButton
                 onClick={() => {
-                  setTempWorkout({
-                    ...tempWorkout,
-                    percentages: [
-                      ...tempWorkout.percentages,
-                      currentPercentage,
-                    ],
-                  });
-                  setCurrentPercentage("");
+                  typeof currentPercentage === "number" &&
+                    setTempWorkout({
+                      ...tempWorkout,
+                      percentages: [
+                        ...tempWorkout.percentages,
+                        currentPercentage,
+                      ],
+                    });
+                  setCurrentPercentage(undefined);
                 }}
                 icon={<AddIcon />}
                 aria-label="Add to workout"
@@ -176,4 +177,4 @@ const inputForm = ({ workout, handleCalculate }: Props) => {
   );
 };
 
-export default inputForm;
+export default InputForm;

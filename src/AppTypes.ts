@@ -1,8 +1,8 @@
 interface workoutInput {
-    'barWeight': number
-    'availablePlates': number[]
-    'oneRepMax': number
-    'percentages': number[]
+    barWeight: number
+    availablePlates: (string | number)[]
+    oneRepMax: number
+    percentages: number[]
 }
 
 export interface apiInput {

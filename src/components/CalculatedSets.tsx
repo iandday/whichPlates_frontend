@@ -25,7 +25,9 @@ const CalculatedSets = ({ workout }: Props) => {
         padding="10px"
       >
         <CardContainer>
-          {data?.sets.length > 0 && <PlateCard plates={data?.used_plates} />}
+          {data && data?.sets.length > 0 && (
+            <PlateCard plates={data?.used_plates} />
+          )}
         </CardContainer>
         {data?.sets.map((set) => (
           <CardContainer>

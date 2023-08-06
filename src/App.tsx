@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { Button, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Grid, GridItem, Text } from "@chakra-ui/react";
 import NavBar from "./components/NavBar.tsx";
-import InputForm from "./components/inputForm.tsx";
 import React from "react";
 import workoutInput from "./AppTypes.ts";
-import useData, { FetchResponse } from "./hooks/useData.ts";
 import CalculatedSets from "./components/CalculatedSets.tsx";
 import Footer from "./components/Footer.tsx";
+import InputForm from "./components/inputForm.tsx";
 
 function App() {
   const [workout, setWorkout] = React.useState<workoutInput>({
