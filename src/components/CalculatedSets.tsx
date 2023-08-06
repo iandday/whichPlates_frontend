@@ -26,12 +26,12 @@ const CalculatedSets = ({ workout }: Props) => {
       >
         <CardContainer>
           {data && data?.sets.length > 0 && (
-            <PlateCard plates={data?.used_plates} />
+            <PlateCard key="plate" plates={data?.used_plates} />
           )}
         </CardContainer>
         {data?.sets.map((set) => (
           <CardContainer>
-            <SetCard set={set} />
+            <SetCard key={set.count.toString()} set={set} />
           </CardContainer>
         ))}
       </SimpleGrid>

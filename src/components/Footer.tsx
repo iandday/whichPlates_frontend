@@ -57,6 +57,7 @@ const Footer = () => {
         align={{ base: "center", md: "center" }}
       >
         <HStack>
+          <Spacer />
           <Text>© 2023 All rights reserved</Text>
           <Spacer />
           <SocialButton

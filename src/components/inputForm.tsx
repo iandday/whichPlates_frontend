@@ -116,6 +116,7 @@ const InputForm = ({ workout, handleCalculate }: Props) => {
               >
                 <NumberInputField />
               </NumberInput>
+              <Text>%</Text>
               <Spacer />
             </HStack>
             <HStack padding="5px">
@@ -159,7 +160,7 @@ const InputForm = ({ workout, handleCalculate }: Props) => {
             <Text>Workout Percentages</Text>
             <UnorderedList>
               {tempWorkout.percentages.map((p) => (
-                <ListItem>{p}</ListItem>
+                <ListItem key={p.toString()}>{p}%</ListItem>
               ))}
             </UnorderedList>
             <Button
