@@ -8,7 +8,6 @@ import {
   Badge,
   WrapItem,
   Wrap,
-  AspectRatio,
   CardFooter,
 } from "@chakra-ui/react";
 import { UsedPlate } from "../hooks/useData";
@@ -113,7 +112,7 @@ const PlateCard = ({ plates }: Props) => {
         </Wrap>
       </CardBody>
       <CardFooter>
-        <ColorKey />
+        <ColorKey plates={plates} />
       </CardFooter>
     </Card>
   );

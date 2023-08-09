@@ -31,7 +31,7 @@ interface Props {
 
 const InputForm = ({ workout, handleCalculate }: Props) => {
   const [currentPercentage, setCurrentPercentage] = React.useState<
-    number | undefined
+    number | undefined | string
   >(undefined);
   const [tempWorkout, setTempWorkout] = React.useState<workoutInput>({
     ...workout,
@@ -131,7 +131,7 @@ const InputForm = ({ workout, handleCalculate }: Props) => {
                         currentPercentage,
                       ],
                     });
-                  setCurrentPercentage(undefined);
+                  setCurrentPercentage("");
                 }}
                 icon={<AddIcon />}
                 aria-label="Add to workout"

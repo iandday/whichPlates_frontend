@@ -47,27 +47,16 @@ const SocialButton = ({
 const Footer = () => {
   return (
     <Box>
-      <Container
-        as={Stack}
-        maxW={"6xl"}
-        py={4}
-        direction={{ base: "column", md: "row" }}
-        spacing={4}
-        justify={{ base: "center", md: "space-between" }}
-        align={{ base: "center", md: "center" }}
-      >
-        <HStack>
-          <Spacer />
-          <Text>© 2023 All rights reserved</Text>
-          <Spacer />
-          <SocialButton
-            label={"GitHub"}
-            href={"https://github.com/iandday/whichPlates_website"}
-          >
-            <FaGithub />
-          </SocialButton>
-        </HStack>
-      </Container>
+      <HStack>
+        <Spacer />
+        <Text></Text>
+        <SocialButton
+          label={"GitHub"}
+          href={"https://github.com/iandday/whichPlates_website"}
+        >
+          <FaGithub />
+        </SocialButton>
+      </HStack>
     </Box>
   );
 };

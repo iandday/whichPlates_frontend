@@ -35,8 +35,8 @@ function App() {
             Calculate the required plates for each set based off a percentage of
             your one-rep max. Select your barbell weight and available plates,
             then input your one-rep max. Add sets by entering a percentage and
-            clicking the addition button. Clicking the delete button will clear
-            the workout list.
+            clicking the green addition button. Clicking the red delete button
+            will clear the workout list.
           </Text>
           <InputForm
             handleCalculate={(newWorkout) => setWorkout(newWorkout)}

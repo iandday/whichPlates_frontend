@@ -113,7 +113,7 @@ const SetCard = ({ set }: Props) => {
         </Wrap>
       </CardBody>
       <CardFooter>
-        <ColorKey />
+        <ColorKey plates={set.plates} />
       </CardFooter>
     </Card>
   );
