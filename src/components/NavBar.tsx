@@ -7,6 +7,7 @@ const NavBar = ({}: Props) => {
   return (
     <>
       <Flex padding="2">
+        <Spacer />
         <Heading>Which Plates?</Heading>
         <Spacer />
         <ColorModeSwitch />

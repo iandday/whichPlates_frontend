@@ -14,15 +14,30 @@ import {
   HStack,
   IconButton,
   Box,
-  VStack,
+  Image,
   SimpleGrid,
   Container,
   Spacer,
   useCheckboxGroup,
+  Card,
+  CardBody,
+  Wrap,
+  CardFooter,
+  Heading,
+  Center,
 } from "@chakra-ui/react";
 import workout from "../AppTypes.ts";
 import workoutInput from "../AppTypes.ts";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import plate_45 from "../assets/45.webp";
+import plate_35 from "../assets/35.webp";
+import plate_25 from "../assets/25.webp";
+import plate_15 from "../assets/15.webp";
+import plate_10 from "../assets/10.webp";
+import plate_5 from "../assets/5.webp";
+import plate_2_5 from "../assets/2.5.webp";
+import plate_1_25 from "../assets/1.25.webp";
+import ColorKey from "./ColorKey.tsx";
 
 interface Props {
   workout: workoutInput;
@@ -39,69 +54,58 @@ const InputForm = ({ workout, handleCalculate }: Props) => {
   const { value, getCheckboxProps } = useCheckboxGroup({
     defaultValue: [45, 25, 15, 10, 5, 2.5],
   });
+  var all_plates = [
+    { count: 1, weight: 45 },
+    { count: 1, weight: 35 },
+    { count: 1, weight: 25 },
+    { count: 1, weight: 15 },
+    { count: 1, weight: 10 },
+    { count: 1, weight: 5 },
+    { count: 1, weight: 2.5 },
+    { count: 1, weight: 1.25 },
+  ];
 
   return (
     <>
-      <SimpleGrid minChildWidth="120px" spacing={5} padding="5">
-        <Container centerContent>
-          <Box>
-            <Text>Barbell Weight</Text>
-            <Select defaultValue={45} width="100px">
-              <option value={25}>25</option>
-              <option value={35}>35</option>
-              <option value={45}>45</option>
-            </Select>
-            <Text>One Rep Max</Text>
-            <NumberInput
-              defaultValue={tempWorkout.barWeight}
-              min={tempWorkout.barWeight}
-              value={tempWorkout.oneRepMax}
-              onChange={(_, valueAsNumber) =>
-                setTempWorkout({ ...tempWorkout, oneRepMax: valueAsNumber })
-              }
-              width="100px"
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-          </Box>
-        </Container>
-        <Container centerContent>
-          <Box>
-            <Text>Available Plates</Text>
-            <VStack>
-              <HStack>
-                <Checkbox {...getCheckboxProps({ value: 45 })}>45</Checkbox>
-                <Spacer />
-                <Checkbox {...getCheckboxProps({ value: 35 })}>35</Checkbox>
-                <Spacer />
-                <Checkbox {...getCheckboxProps({ value: 25 })}>25</Checkbox>
-                <Spacer />
-              </HStack>
-              <HStack>
-                <Checkbox {...getCheckboxProps({ value: 15 })}>15</Checkbox>
-                <Spacer />
-                <Checkbox {...getCheckboxProps({ value: 10 })}>10</Checkbox>
-                <Spacer />
-                <Checkbox {...getCheckboxProps({ value: 5 })}>5</Checkbox>
-                <Spacer />
-              </HStack>
-              <HStack>
-                <Spacer />
-                <Checkbox {...getCheckboxProps({ value: 2.5 })}>2.5</Checkbox>
-                <Spacer />
-                <Checkbox {...getCheckboxProps({ value: 1.25 })}>1.25</Checkbox>
-                <Spacer />
-              </HStack>
-            </VStack>
-          </Box>
-        </Container>
-        <Container centerContent>
-          <Box>
-            <Text>Add Percentage (Set)</Text>
+      <SimpleGrid columns={[1, null, 3]} spacing={5} padding="5">
+        <Card>
+          <Heading size="md" paddingTop="10px">
+            <Center>Set Information</Center>
+          </Heading>
+          <CardBody>
+            <HStack paddingTop="15px">
+              <Spacer />
+              <Text>Barbell Weight</Text>
+              <Select defaultValue={45} width="100px">
+                <option value={25}>25</option>
+                <option value={35}>35</option>
+                <option value={45}>45</option>
+              </Select>
+              <Spacer />
+            </HStack>
+            <HStack paddingTop="15px">
+              <Spacer />
+              <Text>One Rep Max</Text>
+              <NumberInput
+                defaultValue={tempWorkout.barWeight}
+                min={tempWorkout.barWeight}
+                value={tempWorkout.oneRepMax}
+                onChange={(_, valueAsNumber) =>
+                  setTempWorkout({ ...tempWorkout, oneRepMax: valueAsNumber })
+                }
+                width="100px"
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              <Spacer />
+            </HStack>
+            <HStack paddingTop="15px">
+              <Text>Add Set (Percentage of 1 Rep Max)</Text>
+            </HStack>
             <HStack>
               <Spacer />
               <NumberInput
@@ -117,9 +121,6 @@ const InputForm = ({ workout, handleCalculate }: Props) => {
                 <NumberInputField />
               </NumberInput>
               <Text>%</Text>
-              <Spacer />
-            </HStack>
-            <HStack padding="5px">
               <Spacer />
               <IconButton
                 onClick={() => {
@@ -138,7 +139,6 @@ const InputForm = ({ workout, handleCalculate }: Props) => {
                 colorScheme="green"
                 size="sm"
               />
-              <Spacer />
               <IconButton
                 onClick={() => {
                   setTempWorkout({
@@ -153,25 +153,81 @@ const InputForm = ({ workout, handleCalculate }: Props) => {
               />
               <Spacer />
             </HStack>
-          </Box>
-        </Container>
-        <Container centerContent>
-          <Box>
-            <Text>Workout Percentages</Text>
+            <HStack padding="15px">
+              <Heading size="sm" padding="20px">
+                Sets
+              </Heading>
+              <Spacer />
+              <Button
+                bg="green"
+                onClick={() => {
+                  handleCalculate({ ...tempWorkout, availablePlates: value });
+                }}
+              >
+                Calculate
+              </Button>
+            </HStack>
             <UnorderedList>
               {tempWorkout.percentages.map((p) => (
-                <ListItem key={p.toString()}>{p}%</ListItem>
+                <ListItem key={p.toString()}>
+                  {p}% - {tempWorkout.oneRepMax * (p / 100)} lbs
+                </ListItem>
               ))}
             </UnorderedList>
-            <Button
-              bg="green"
-              onClick={() => {
-                handleCalculate({ ...tempWorkout, availablePlates: value });
-              }}
-            >
-              Calculate
-            </Button>
-          </Box>
+          </CardBody>
+        </Card>
+        <Card>
+          <Heading size="md" paddingTop="10px">
+            <Center>Available Plates</Center>
+          </Heading>
+          <CardBody>
+            <Wrap spacing="15px" justify="center">
+              <Checkbox {...getCheckboxProps({ value: 45 })}>
+                <Image src={plate_45} objectFit="scale-down" boxSize="100px" />
+              </Checkbox>
+              <Checkbox {...getCheckboxProps({ value: 35 })}>
+                {" "}
+                <Image src={plate_35} objectFit="scale-down" boxSize="100px" />
+              </Checkbox>
+              <Checkbox {...getCheckboxProps({ value: 25 })}>
+                {" "}
+                <Image src={plate_25} objectFit="scale-down" boxSize="100px" />
+              </Checkbox>
+              <Checkbox {...getCheckboxProps({ value: 15 })}>
+                {" "}
+                <Image src={plate_15} objectFit="scale-down" boxSize="100px" />
+              </Checkbox>
+              <Checkbox {...getCheckboxProps({ value: 10 })}>
+                {" "}
+                <Image src={plate_10} objectFit="scale-down" boxSize="100px" />
+              </Checkbox>
+              <Checkbox {...getCheckboxProps({ value: 5 })}>
+                {" "}
+                <Image src={plate_5} objectFit="scale-down" boxSize="100px" />
+              </Checkbox>
+              <Checkbox {...getCheckboxProps({ value: 2.5 })}>
+                {" "}
+                <Image src={plate_2_5} objectFit="scale-down" boxSize="100px" />
+              </Checkbox>
+              <Checkbox {...getCheckboxProps({ value: 1.25 })}>
+                {" "}
+                <Image
+                  src={plate_1_25}
+                  objectFit="scale-down"
+                  boxSize="100px"
+                />
+              </Checkbox>
+            </Wrap>
+          </CardBody>
+          <CardFooter>
+            <ColorKey plates={all_plates} />
+          </CardFooter>
+        </Card>
+        <Container centerContent>
+          <Box></Box>
+        </Container>
+        <Container centerContent>
+          <Box></Box>
         </Container>
       </SimpleGrid>
     </>
